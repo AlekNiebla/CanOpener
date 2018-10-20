@@ -17,16 +17,22 @@ public class page_MyLists extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_page_nat_disaster_layout,container,false);
-        textView = (TextView)view.findViewById(R.id.TextPruebaLists);
+        View view = inflater.inflate(R.layout.fragment_page_nat_disaster_layout, container, false);
+        textView = (TextView) view.findViewById(R.id.TextPruebaLists);
 
         Bundle bundle = getArguments();
         String message = Integer.toString(bundle.getInt("count"));
-        textView.setText("WEEEEEEEE "+message+" lA NASA MAMOOON");
 
         return view;
     }
 
-   }
+    public static page_MyLists newInstance() {
+        page_MyLists fragment = new page_MyLists();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+}

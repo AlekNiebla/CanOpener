@@ -29,9 +29,15 @@ public class pageNatDisaster extends android.support.v4.app.Fragment {
 
         Bundle bundle = getArguments();
         String message = Integer.toString(bundle.getInt("count"));
-        textView.setText("VERGAAA "+message+" SwipeViewPage...");
 
         return view;
+    }
+
+    public static pageNatDisaster newInstance(){
+        pageNatDisaster fragment = new pageNatDisaster();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 }
