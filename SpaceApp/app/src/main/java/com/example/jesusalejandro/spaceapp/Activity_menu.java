@@ -37,6 +37,7 @@ public class Activity_menu extends AppCompatActivity implements DisasterListFrag
         setContentView(R.layout.activity_menu);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Natural disaster planning");
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -93,8 +94,8 @@ public class Activity_menu extends AppCompatActivity implements DisasterListFrag
     }
 
     @Override
-    public void onListSelected(MyLists list) {
-        Intent intent = new Intent(this, MyListsFragment.class);
+    public void onListSelected(Container list) {
+        Intent intent = new Intent(this, ListPlanProvisionActivity.class);
         intent.putExtra("MY LISTS", list);
         startActivity(intent);
     }

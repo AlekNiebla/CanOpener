@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHolderLists> {
 
-    private List<MyLists> mylists = new ArrayList<>();
+    private List<Container> mylists = new ArrayList<>();
     private MyListsListener listener;
 
     public MyListsAdapter(MyListsListener listener) {
@@ -39,7 +39,7 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
         return mylists.size();
     }
 
-    public void update(List<MyLists> lists) {
+    public void update(List<Container> lists) {
         this.mylists.clear();
         this.mylists.addAll(lists);
         notifyDataSetChanged();
@@ -59,8 +59,8 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
 
         }
 
-        void bindView(final MyLists mylists) {
-            listTitle.setText(mylists.getTitle());
+        void bindView(final Container mylists) {
+            listTitle.setText(mylists.getDisasterName());
 
             BtnProvisions.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,7 +81,7 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
     }
 
     interface MyListsListener {
-        void onListSelected(MyLists list);
+        void onListSelected(Container list);
     }
 
 

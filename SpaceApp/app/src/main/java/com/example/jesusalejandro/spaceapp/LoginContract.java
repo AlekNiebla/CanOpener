@@ -8,6 +8,8 @@ public interface LoginContract {
         void login(boolean isAuthorized);
 
         void register(User user);
+
+        void showError(String message);
     }
 
     interface Presenter {

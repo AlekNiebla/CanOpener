@@ -20,13 +20,13 @@ public class MyListsPresenter implements MyListsContract.Presenter {
 
     @Override
     public void getMyLists() {
-        Disposable disposable = repo.getMyLists()
+        Disposable disposable = repo.getMyLists(repo.getUserEmail())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        new Consumer<List<MyLists>>() {
+                        new Consumer<List<Container>>() {
                             @Override
-                            public void accept(List<MyLists> lists) throws Exception {
+                            public void accept(List<Container> lists) throws Exception {
                                 vm.showMyLists(lists);
                             }
                         },

@@ -38,7 +38,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void register(User user) {
+        Toast.makeText(this, "User registered", Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    public void showError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

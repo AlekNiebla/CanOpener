@@ -62,7 +62,7 @@ public class MyListsFragment extends Fragment implements MyListsContract.View, M
     }
 
     @Override
-    public void showMyLists(List<MyLists> lists) {
+    public void showMyLists(List<Container> lists) {
         adapter.update(lists);
     }
 
@@ -73,11 +73,11 @@ public class MyListsFragment extends Fragment implements MyListsContract.View, M
 
 
     interface MyListsFragmentListener {
-        void onListSelected(MyLists list);
+        void onListSelected(Container list);
     }
 
     @Override
-    public void onListSelected(MyLists list) {
+    public void onListSelected(Container list) {
         listener.onListSelected(list);
     }
 

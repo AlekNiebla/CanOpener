@@ -20,8 +20,8 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void login(User user) {
         Disposable disposable = repo.getLogin(user)
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         new Consumer<Boolean>() {
                             @Override
@@ -32,7 +32,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                         new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-
+                                vm.showError("Wrong username or password");
                             }
                         }
                 );
@@ -41,9 +41,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void register(User user) {
-        Disposable disposable = repo.getRegister(new User(1, "example@nasa.com", "1234"))
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+        Disposable disposable = repo.getRegister(user)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         new Consumer<User>() {
                             @Override
@@ -54,7 +54,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                         new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-                                
+                                throwable.printStackTrace();
                             }
                         }
                 );
