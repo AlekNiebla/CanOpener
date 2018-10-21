@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyListsFragment extends Fragment implements MyListsContract.View,MyListsAdapter.MyListsListener
-{
+public class MyListsFragment extends Fragment implements MyListsContract.View, MyListsAdapter.MyListsListener {
 
 
     private RecyclerView recycleLists;
@@ -32,10 +31,10 @@ public class MyListsFragment extends Fragment implements MyListsContract.View,My
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_page__my_lists, container, false);
-        presenter = new MyListsPresenter(new DisasterRepoImpl(), this);//Check this
+        View view = inflater.inflate(R.layout.fragment_page__my_lists, container, false);
+        presenter = new MyListsPresenter(new MyListsRepoImpl(), this);//Check this
         adapter = new MyListsAdapter(this);
-        recycleLists = view.findViewById(R.id.disaster_list);
+        recycleLists = view.findViewById(R.id.lists_rv);
         recycleLists.setLayoutManager(new LinearLayoutManager(getContext()));
         recycleLists.setAdapter(adapter);
         presenter.getMyLists();
@@ -73,8 +72,7 @@ public class MyListsFragment extends Fragment implements MyListsContract.View,My
     }
 
 
-
-    interface MyListsFragmentListener{
+    interface MyListsFragmentListener {
         void onListSelected(MyLists list);
     }
 

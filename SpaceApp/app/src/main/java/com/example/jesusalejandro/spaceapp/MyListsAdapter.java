@@ -16,7 +16,7 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
     private List<MyLists> mylists = new ArrayList<>();
     private MyListsListener listener;
 
-    public MyListsAdapter(MyListsListener listener){
+    public MyListsAdapter(MyListsListener listener) {
         this.listener = listener;
     }
 
@@ -25,7 +25,7 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
     @Override
     public ViewHolderLists onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.fragment_mylist_listelement,null,false);
+        View view = inflater.inflate(R.layout.holder_mylist_listelement, viewGroup, false);
         return new ViewHolderLists(view);
     }
 
@@ -39,53 +39,50 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
         return mylists.size();
     }
 
-    public void update (List<MyLists> lists){
+    public void update(List<MyLists> lists) {
         this.mylists.clear();
         this.mylists.addAll(lists);
         notifyDataSetChanged();
     }
 
-    public  class ViewHolderLists extends RecyclerView.ViewHolder {
+    class ViewHolderLists extends RecyclerView.ViewHolder {
 
-        TextView listTitle,BtnProvisions, BtnPlans;
+        TextView listTitle, BtnProvisions, BtnPlans;
 
-        public ViewHolderLists(View itemView)
-                {
+        public ViewHolderLists(View itemView) {
 
             super(itemView);
-            listTitle= itemView.findViewById(R.id.id_mylist_titulo);
-            BtnProvisions= itemView.findViewById(R.id.btn_Provision);
+            listTitle = itemView.findViewById(R.id.id_mylist_titulo);
+            BtnProvisions = itemView.findViewById(R.id.btn_Provision);
             BtnPlans = itemView.findViewById(R.id.btn_Plans);
 
 
-            }
+        }
 
-            void bindView(final MyLists mylists)
-            {
-                listTitle.setText(mylists.getTitle());
+        void bindView(final MyLists mylists) {
+            listTitle.setText(mylists.getTitle());
 
-                BtnProvisions.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onListSelected(mylists);
-                    }
-                });
+            BtnProvisions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onListSelected(mylists);
+                }
+            });
 
-                BtnPlans.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onListSelected(mylists);
-                    }
-                });
-            }
+            BtnPlans.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onListSelected(mylists);
+                }
+            });
+        }
 
 
     }
 
-    interface MyListsListener{
+    interface MyListsListener {
         void onListSelected(MyLists list);
     }
-
 
 
 }

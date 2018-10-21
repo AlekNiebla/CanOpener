@@ -2,19 +2,25 @@ package com.example.jesusalejandro.spaceapp;
 
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 public class MyListsPresenter implements MyListsContract.Presenter {
     private MyListsRepository repo;
     private MyListsContract.View vm;
     private CompositeDisposable disposables = new CompositeDisposable();
 
-    public MyListsPresenter(DisasterRepository repo, MyListsContract.View vm){
+    public MyListsPresenter(MyListsRepository repo, MyListsContract.View vm){
         this.repo = repo;
         this.vm = vm;
     }
 
     @Override
     public void getMyLists() {
-        Disposable disposable = repo.getDisasters()
+        Disposable disposable = repo.getMyLists()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

@@ -25,6 +25,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DisasterDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="."
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
