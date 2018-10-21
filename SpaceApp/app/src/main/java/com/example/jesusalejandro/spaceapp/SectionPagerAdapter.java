@@ -16,7 +16,7 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return pageNatDisaster.newInstance();
             case 1:
-                return page_MyLists.newInstance();
+                return MyListsFragment.newInstance();
             default:
                 throw new IllegalStateException("There can't be more than 2 tabs");
         }
