@@ -64,6 +64,28 @@ public class DisasterDetailPresenter implements DisasterDetailContract.Presenter
     }
 
     @Override
+    public void getImages(NaturalDisaster disaster) {
+        Disposable disposable = repo.getImages(disaster)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Consumer<List<DisasterImage>>() {
+                            @Override
+                            public void accept(List<DisasterImage> images) throws Exception {
+                                vm.showImages(images);
+                            }
+                        },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+
+                            }
+                        }
+                );
+        disposables.add(disposable);
+    }
+
+    @Override
     public void getVideo(NaturalDisaster disaster) {
 
     }

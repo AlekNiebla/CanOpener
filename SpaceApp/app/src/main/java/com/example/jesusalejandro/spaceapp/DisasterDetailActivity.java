@@ -1,10 +1,11 @@
 package com.example.jesusalejandro.spaceapp;
 
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.ImageView;
@@ -13,20 +14,24 @@ import android.widget.TextView;
 import java.util.List;
 
 public class DisasterDetailActivity extends AppCompatActivity
-        implements SurfaceHolder.Callback, DisasterDetailContract.View, CheckListAdapter.CheckListListener {
+        implements SurfaceHolder.Callback, DisasterDetailContract.View,
+        CheckListAdapter.CheckListListener, ImageDisplayAdapter.ImageListener {
 
     private SurfaceView video;
     private SurfaceHolder holder;
-    private TextView name;
+//    private TextView name;
     private TextView description;
-    private ImageView icon;
+//    private ImageView icon;
     private RecyclerView actions;
     private RecyclerView supplies;
+    private RecyclerView images;
+    private Toolbar toolbar;
     private MediaPlayer player;
     private Boolean hasActiveHolder = false;
     private DisasterDetailContract.Presenter presenter;
     private CheckListAdapter actionsAdapter;
     private CheckListAdapter suppliesAdapter;
+    private ImageDisplayAdapter imagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +42,18 @@ public class DisasterDetailActivity extends AppCompatActivity
 
         presenter = new DisasterDetailPresenter(this, new DisasterRepoImpl());
         video = findViewById(R.id.surfaceView);
-        name = findViewById(R.id.disaster_name);
+//        name = findViewById(R.id.disaster_name);
         description = findViewById(R.id.description);
-        icon = findViewById(R.id.disaster_icon);
+//        icon = findViewById(R.id.disaster_icon);
         holder = video.getHolder();
         holder.addCallback(this);
         actions = findViewById(R.id.action_items);
         supplies = findViewById(R.id.supplies);
+        images = findViewById(R.id.images);
+        toolbar = findViewById(R.id.toolbar);
+
+        toolbar.setTitle(disaster.getName());
+//        toolbar.setNavigationIcon(disaster.getImage());
 
         player = MediaPlayer.create(this, R.raw.flood);
         player.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT);
@@ -55,20 +65,26 @@ public class DisasterDetailActivity extends AppCompatActivity
             }
         });
 
-        name.setText(disaster.getName());
+        setSupportActionBar(toolbar);
+
+//        name.setText(disaster.getName());
         description.setText(disaster.getDescription());
-        icon.setImageResource(R.drawable.ic_flood);
+//        icon.setImageResource(R.drawable.ic_flood);
 
         actionsAdapter = new CheckListAdapter(this);
         suppliesAdapter = new CheckListAdapter(this);
+        imagesAdapter = new ImageDisplayAdapter(this);
         actions.setLayoutManager(new LinearLayoutManager(this));
         supplies.setLayoutManager(new LinearLayoutManager(this));
+        images.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         actions.setAdapter(actionsAdapter);
         supplies.setAdapter(suppliesAdapter);
+        images.setAdapter(imagesAdapter);
 
         presenter.getActionItems(disaster);
         presenter.getSupplies(disaster);
+        presenter.getImages(disaster);
 //        play();
 
 
@@ -127,7 +143,17 @@ public class DisasterDetailActivity extends AppCompatActivity
     }
 
     @Override
+    public void showImages(List<DisasterImage> images) {
+        imagesAdapter.update(images);
+    }
+
+    @Override
     public void onItemClicked(String item, int position, boolean isChecked) {
+
+    }
+
+    @Override
+    public void onImageClick(DisasterImage image) {
 
     }
 }

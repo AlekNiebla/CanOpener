@@ -11,31 +11,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".DisasterDetailActivity">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!--<ImageView-->
+                <!--android:id="@+id/disaster_icon"-->
+                <!--android:layout_width="38dp"-->
+                <!--android:layout_height="38dp"-->
+                <!--tools:src="@drawable/ic_comet"-->
+                <!--tools:text="Disaster Name"-->
+                <!--android:foregroundGravity="center"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/disaster_name"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="16dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textColor="@color/colorBoldText"-->
+                <!--tools:text="Disaster Name" />-->
 
-        <TextView
-            android:id="@+id/disaster_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginEnd="8dp"
-            android:textSize="18sp"
-            android:textColor="@color/colorBoldText"
-            app:layout_constraintBottom_toBottomOf="@+id/disaster_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/disaster_icon"
-            tools:text="Disaster Name" />
 
-        <ImageView
-            android:id="@+id/disaster_icon"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_comet"
-            tools:text="Disaster Name" />
+        </android.support.v7.widget.Toolbar>
+
+        <!--<TextView-->
+            <!--android:id="@+id/disaster_name"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="72dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:textSize="18sp"-->
+            <!--android:textColor="@color/colorBoldText"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/disaster_icon"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/disaster_icon"-->
+            <!--tools:text="Disaster Name" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/disaster_icon"-->
+            <!--android:layout_width="38dp"-->
+            <!--android:layout_height="38dp"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--tools:src="@drawable/ic_comet"-->
+            <!--tools:text="Disaster Name" />-->
         <!--<android.support.v7.widget.Toolbar-->
         <!--android:id="@+id/toolbar"-->
         <!--android:layout_width="match_parent"-->
@@ -65,7 +88,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/disaster_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <TextView
             android:id="@+id/description"

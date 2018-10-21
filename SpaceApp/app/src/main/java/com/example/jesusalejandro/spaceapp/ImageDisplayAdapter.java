@@ -5,13 +5,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ImageDisplayAdapter extends RecyclerView.Adapter<ImageDisplayAdapter.ImageHolder> {
 
-    List<DisasterImage> images = new ArrayList<>();
+    private List<DisasterImage> images = new ArrayList<>();
+    private ImageListener listener;
+
+    public ImageDisplayAdapter(ImageListener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -23,23 +29,41 @@ public class ImageDisplayAdapter extends RecyclerView.Adapter<ImageDisplayAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ImageHolder imageHolder, int i) {
-
+        imageHolder.bindData(images.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return images.size();
+    }
+
+    void update(List<DisasterImage> images){
+        this.images.clear();
+        this.images.addAll(images);
+        notifyDataSetChanged();
     }
 
     class ImageHolder extends RecyclerView.ViewHolder{
 
+        private ImageView image;
+
         public ImageHolder(@NonNull View itemView) {
             super(itemView);
+            image = itemView.findViewById(R.id.image);
         }
 
-
-        void bindData(DisasterImage image){
-
+        void bindData(final DisasterImage image){
+            this.image.setImageResource(image.getResource());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onImageClick(image);
+                }
+            });
         }
+    }
+
+    interface ImageListener{
+        void onImageClick(DisasterImage image);
     }
 }

@@ -37,4 +37,15 @@ public class DisasterRepoImpl implements DisasterRepository {
         items.add("Big flat surface or a boat");
         return Single.just(items);
     }
+
+    @Override
+    public Single<List<DisasterImage>> getImages(NaturalDisaster disaster) {
+        List<DisasterImage> images = new ArrayList<>();
+        images.add(new DisasterImage("", "", R.drawable.flood1));
+        images.add(new DisasterImage("", "", R.drawable.flood2));
+        images.add(new DisasterImage("", "", R.drawable.flood3));
+        images.add(new DisasterImage("", "", R.drawable.flood4));
+        images.add(new DisasterImage("", "", R.drawable.flood5));
+        return Single.just(images);
+    }
 }
