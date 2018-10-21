@@ -13,15 +13,15 @@ public class MyListsPresenter implements MyListsContract.Presenter {
     }
 
     @Override
-    public void getDisasters() {
+    public void getMyLists() {
         Disposable disposable = repo.getDisasters()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         new Consumer<List<MyLists>>() {
                             @Override
-                            public void accept(List<MyLists> disasters) throws Exception {
-                                vm.showDisasters(disasters);
+                            public void accept(List<MyLists> lists) throws Exception {
+                                vm.showMyLists(lists);
                             }
                         },
                         new Consumer<Throwable>() {
@@ -35,7 +35,8 @@ public class MyListsPresenter implements MyListsContract.Presenter {
     }
 
     @Override
-    public void doOnDestroy() {
+    public void doOnDestroy()
+    {
         disposables.dispose();
     }
 }

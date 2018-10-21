@@ -38,7 +38,7 @@ public class MyListsFragment extends Fragment implements MyListsContract.View,My
         recycleLists = view.findViewById(R.id.disaster_list);
         recycleLists.setLayoutManager(new LinearLayoutManager(getContext()));
         recycleLists.setAdapter(adapter);
-        presenter.getDisasters();
+        presenter.getMyLists();
         return view;
     }
 

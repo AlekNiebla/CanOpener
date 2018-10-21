@@ -1,7 +1,6 @@
 package com.example.jesusalejandro.spaceapp;
 
 import java.util.List;
-
 import io.reactivex.Single;
 
 public interface MyListsContract {
@@ -11,7 +10,7 @@ public interface MyListsContract {
     }
 
     interface Presenter{
-        void getDisasters();
+        void getMyLists();
         void doOnDestroy();
     }
 }
