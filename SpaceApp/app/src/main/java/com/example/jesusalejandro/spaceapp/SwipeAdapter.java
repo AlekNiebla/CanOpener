@@ -14,7 +14,7 @@ public class SwipeAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int i) {
         Fragment fragmentMyLists = new page_MyLists();
-        Fragment fragmentDisasters = new pageNatDisaster();
+        Fragment fragmentDisasters = new DisasterListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("count",i+1);
         fragmentDisasters.setArguments(bundle);
