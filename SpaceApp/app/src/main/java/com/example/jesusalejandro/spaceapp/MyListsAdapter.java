@@ -83,7 +83,7 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
     }
 
     interface MyListsListener{
-        void onListSelected(MyLists lists);
+        void onListSelected(MyLists list);
     }
 
 

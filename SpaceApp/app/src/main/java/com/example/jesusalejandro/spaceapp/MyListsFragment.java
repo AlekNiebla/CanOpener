@@ -3,32 +3,54 @@ package com.example.jesusalejandro.spaceapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MyListsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MyListsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MyListsFragment extends Fragment {
+public class MyListsFragment extends Fragment implements MyListsContract.View,MyListsAdapter.MyListsListener
+{
 
-    private OnFragmentInteractionListener mListener;
 
-    private ArrayList<MyLists> myLists;
-    RecyclerView recycleLists;
+    private RecyclerView recycleLists;
+    private MyListsAdapter adapter;
+    private MyListsFragmentListener listener;
+    private MyListsPresenter presenter;
 
     public MyListsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_page__my_lists, container, false);
+        presenter = new MyListsPresenter(new DisasterRepoImpl(), this);//Check this
+        adapter = new MyListsAdapter(this);
+        recycleLists = view.findViewById(R.id.disaster_list);
+        recycleLists.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycleLists.setAdapter(adapter);
+        presenter.getDisasters();
+        return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getActivity() instanceof MyListsFragmentListener) {
+            listener = (MyListsFragmentListener) getActivity();
+        } else {
+            throw new IllegalStateException("Must implement" + MyListsFragmentListener.class.getName());
+        }
+
     }
 
 
@@ -41,56 +63,24 @@ public class MyListsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        myLists = new ArrayList<>();
+    public void showMyLists(List<MyLists> lists) {
+        adapter.update(lists);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_page__my_lists, container, false);
-
-        recycleLists=(RecyclerView)findViewById(R.id.Recyclerid);
-        return view;
+    public void showError(String error) {
+        Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
+
+    interface MyListsFragmentListener{
+        void onListSelected(MyLists list);
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onListSelected(MyLists list) {
+        listener.onListSelected(list);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
