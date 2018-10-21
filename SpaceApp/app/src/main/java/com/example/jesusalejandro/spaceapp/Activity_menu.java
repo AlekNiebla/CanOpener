@@ -1,5 +1,6 @@
 package com.example.jesusalejandro.spaceapp;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,7 +20,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class Activity_menu extends AppCompatActivity {
+public class Activity_menu extends AppCompatActivity implements DisasterListFragment.NaturalDisasterFragmentListener {
 
 
     private SectionPagerAdapter mSectionsPagerAdapter;
@@ -81,5 +82,12 @@ public class Activity_menu extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDisasterSelected(NaturalDisaster disaster) {
+        Intent intent = new Intent(this, DisasterDetailActivity.class);
+        intent.putExtra("DISASTER", disaster);
+        startActivity(intent);
     }
 }
