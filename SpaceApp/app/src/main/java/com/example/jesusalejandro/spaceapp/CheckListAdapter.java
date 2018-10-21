@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.CheckItem> {
+public class CheckListAdapter extends RecyclerView.Adapter {
 
     private List<String> items = new ArrayList<>();
     private CheckListListener listener;
@@ -21,22 +21,33 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Chec
         this.listener = listener;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position < items.size()) return 0;
+        return 1;
+    }
+
     @NonNull
     @Override
-    public CheckItem onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.holder_checkable_item, viewGroup, false);
-        return new CheckItem(view);
+        if (i == 0) {
+            View view = inflater.inflate(R.layout.holder_checkable_item, viewGroup, false);
+            return new CheckItem(view);
+        } else {
+            View view = inflater.inflate(R.layout.holder_export_list, viewGroup, false);
+            return new AddListItem(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CheckItem checkItem, int i) {
-        checkItem.bindData(items.get(i), i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (i != items.size()) ((CheckItem)holder).bindData(items.get(i), i);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items.size() + 1;
     }
 
     void update(List<String> items){
@@ -65,8 +76,23 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListAdapter.Chec
         }
     }
 
+    class AddListItem extends RecyclerView.ViewHolder{
+
+
+        public AddListItem(@NonNull View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onAddListSelected();
+                }
+            });
+        }
+    }
+
     interface CheckListListener{
         void onItemClicked(String item, int position, boolean isChecked);
+        void onAddListSelected();
     }
 
 }

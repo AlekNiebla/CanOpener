@@ -13,7 +13,7 @@ public class DisasterRepoImpl implements DisasterRepository {
         disasters.add(new NaturalDisaster(R.drawable.ic_comet, "Comet", "A Comet"));
         disasters.add(new NaturalDisaster(R.drawable.ic_earthquake, "Earthquake", "An earthquake"));
         disasters.add(new NaturalDisaster(R.drawable.ic_drought, "Drought", "A drought"));
-        disasters.add(new NaturalDisaster(R.drawable.ic_fire, "Fire", "A fire"));
+        disasters.add(new NaturalDisaster(R.drawable.ic_house_fire, "Fire", "A fire"));
         disasters.add(new NaturalDisaster(R.drawable.ic_avalanche, "Avalanche", "An avalanche"));
         return Single.just(disasters);
     }

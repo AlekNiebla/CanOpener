@@ -153,6 +153,11 @@ public class DisasterDetailActivity extends AppCompatActivity
     }
 
     @Override
+    public void onAddListSelected() {
+
+    }
+
+    @Override
     public void onImageClick(DisasterImage image) {
 
     }
