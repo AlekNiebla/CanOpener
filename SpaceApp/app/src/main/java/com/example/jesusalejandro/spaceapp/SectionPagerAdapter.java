@@ -14,7 +14,7 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return pageNatDisaster.newInstance();
+                return DisasterListFragment.newInstance();
             case 1:
                 return MyListsFragment.newInstance();
             default:
