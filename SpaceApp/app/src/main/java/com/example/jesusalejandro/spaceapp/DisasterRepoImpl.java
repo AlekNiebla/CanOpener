@@ -17,4 +17,24 @@ public class DisasterRepoImpl implements DisasterRepository {
         disasters.add(new NaturalDisaster(R.drawable.ic_avalanche, "Avalanche", "An avalanche"));
         return Single.just(disasters);
     }
+
+    @Override
+    public Single<List<String>> getActionItems(NaturalDisaster disaster) {
+        List<String> items = new ArrayList<>();
+        items.add("Locate high ground");
+        items.add("Save important documents in a waterproof container");
+        items.add("Avoid valleys");
+        items.add("Get your pet");
+        return Single.just(items);
+    }
+
+    @Override
+    public Single<List<String>> getSupplies(NaturalDisaster disaster) {
+        List<String> items = new ArrayList<>();
+        items.add("Clean water");
+        items.add("Canned food");
+        items.add("First-aid kit");
+        items.add("Big flat surface or a boat");
+        return Single.just(items);
+    }
 }
