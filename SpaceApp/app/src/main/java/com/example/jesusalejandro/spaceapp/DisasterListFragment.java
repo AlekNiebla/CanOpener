@@ -34,7 +34,7 @@ public class DisasterListFragment extends Fragment implements NaturalDisasterCon
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_nat_disaster_layout, container, false);
         presenter = new DisasterPresenter(new DisasterRepoImpl(), this);
-        adapter = new NaturalDisasterAdapter();
+        adapter = new NaturalDisasterAdapter(this);
         disasters = view.findViewById(R.id.disaster_list);
         disasters.setLayoutManager(new LinearLayoutManager(getContext()));
         disasters.setAdapter(adapter);

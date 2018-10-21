@@ -14,6 +14,12 @@ import java.util.List;
 public class NaturalDisasterAdapter extends RecyclerView.Adapter<NaturalDisasterAdapter.NaturalDisasterHolder> {
 
     private List<NaturalDisaster> disasters = new ArrayList<>();
+    private DisasterListListener listener;
+
+
+    public NaturalDisasterAdapter(DisasterListListener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -52,10 +58,16 @@ public class NaturalDisasterAdapter extends RecyclerView.Adapter<NaturalDisaster
             icon = itemView.findViewById(R.id.disaster_icon);
         }
 
-        void bindView(NaturalDisaster disaster){
+        void bindView(final NaturalDisaster disaster){
             title.setText(disaster.getName());
             description.setText(disaster.getDescription());
             icon.setImageResource(disaster.getImage());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDisasterSelected(disaster);
+                }
+            });
         }
     }
 
