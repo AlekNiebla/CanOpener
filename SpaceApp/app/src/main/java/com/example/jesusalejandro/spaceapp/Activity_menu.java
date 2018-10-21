@@ -20,7 +20,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class Activity_menu extends AppCompatActivity implements DisasterListFragment.NaturalDisasterFragmentListener {
+public class Activity_menu extends AppCompatActivity implements DisasterListFragment.NaturalDisasterFragmentListener,
+                                                                MyListsFragment.MyListsFragmentListener {
 
 
     private SectionPagerAdapter mSectionsPagerAdapter;
@@ -90,4 +91,12 @@ public class Activity_menu extends AppCompatActivity implements DisasterListFrag
         intent.putExtra("DISASTER", disaster);
         startActivity(intent);
     }
+
+    @Override
+    public void onListSelected(MyLists list) {
+        Intent intent = new Intent(this, MyListsFragment.class);
+        intent.putExtra("MY LISTS", list);
+        startActivity(intent);
+    }
+
 }
