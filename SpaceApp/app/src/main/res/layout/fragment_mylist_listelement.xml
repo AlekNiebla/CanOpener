@@ -43,8 +43,8 @@
                     android:layout_height="18pt"
                     android:layout_weight="1"/>
                 <TextView
-                    android:id="@+id/btn_Actions"
-                    android:text="Actions"
+                    android:id="@+id/btn_Plans"
+                    android:text="Plans"
                     android:textSize="20dp"
                     android:textAlignment="center"
                     android:paddingTop="5dp"

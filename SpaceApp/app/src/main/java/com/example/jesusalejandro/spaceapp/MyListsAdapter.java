@@ -1,5 +1,6 @@
 package com.example.jesusalejandro.spaceapp;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +20,10 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
         this.listener = listener;
     }
 
+
+    @NonNull
     @Override
-    public ViewHolderLists onCreateViewHolder( ViewGroup viewGroup, int i) {
+    public ViewHolderLists onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.fragment_mylist_listelement,null,false);
         return new ViewHolderLists(view);
@@ -28,7 +31,7 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(MyListsAdapter.ViewHolderLists viewHolderLists, int i) {
-                viewHolderLists.listTittle.setText(mylists.get(i).getTitle());
+        viewHolderLists.bindView(mylists.get(i));
     }
 
     @Override
@@ -36,15 +39,47 @@ public class MyListsAdapter extends RecyclerView.Adapter<MyListsAdapter.ViewHold
         return mylists.size();
     }
 
+    public void update (List<MyLists> lists){
+        this.mylists.clear();
+        this.mylists.addAll(lists);
+        notifyDataSetChanged();
+    }
+
     public  class ViewHolderLists extends RecyclerView.ViewHolder {
 
-        TextView listTittle;
+        TextView listTitle,BtnProvisions, BtnPlans;
 
-        public ViewHolderLists(View itemView){
+        public ViewHolderLists(View itemView)
+                {
 
             super(itemView);
-            listTittle= (TextView)itemView.findViewById(R.id.id_mylist_titulo);
-        }
+            listTitle= itemView.findViewById(R.id.id_mylist_titulo);
+            BtnProvisions= itemView.findViewById(R.id.btn_Provision);
+            BtnPlans = itemView.findViewById(R.id.btn_Plans);
+
+
+            }
+
+            void bindView(final MyLists mylists)
+            {
+                listTitle.setText(mylists.getTitle());
+
+                BtnProvisions.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onListSelected(mylists);
+                    }
+                });
+
+                BtnPlans.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onListSelected(mylists);
+                    }
+                });
+            }
+
+
     }
 
     interface MyListsListener{
